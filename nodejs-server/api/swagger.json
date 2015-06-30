@@ -1,0 +1,254 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CA APIM ACME Warehouse REST API Demo",
+    "description": "An API built on Swagger for for the ACME Warehouse Demo.  This demo does pretty much the same thing as the demo shipped in the combined portal/gateway image.  Should be familiar, but run on Swagger.io instead of the Gateway.",
+    "version": "1.0.0"
+  },
+  "produces": ["application/json"],
+  "host": "localhost:8080",
+  "basePath": "/v1",
+  "paths": {
+  
+  "/order": {
+    "get": {
+      "x-swagger-router-controller": "Orders",
+      "tags": ["Orders"],
+      "operationId": "orderGet",
+      "responses": {
+        
+        "200": {
+  "description" : "List of all ACME Warehouse orders.",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Order"
+    }
+  }
+}
+        ,
+        
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    }
+  } ,
+  
+  "/order/new": {
+    "get": {
+      "x-swagger-router-controller": "Orders",
+      "tags": ["Orders"],
+      "operationId": "orderNewGet",
+      "responses": {
+        
+        "200": {
+  "description" : "A new order number.",
+  "schema" : {
+    "type" : "object"
+  }
+}
+        ,
+        
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    }
+  } ,
+  
+  "/order/{orderid}": {
+    "put": {
+      "x-swagger-router-controller": "Orders",
+      "tags": ["Orders"],
+      "operationId": "orderOrderidPut",
+      "parameters": [
+        
+        {
+  "name" : "orderid",
+  "in" : "path",
+  "description" : "The id of the order to place",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        
+        "200": {
+  "description" : "Success of placing an order."
+}
+        ,
+        
+        "404": {
+  "description" : "Order ID does not exist."
+}
+        ,
+        
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    }
+  } 
+  
+   ,
+  
+  "/products": {
+    "get": {
+      "x-swagger-router-controller": "Products",
+      "tags": ["Products"],
+      "operationId": "productsGet",
+      "responses": {
+        
+        "200": {
+  "description" : "An array of Warehouse Products",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Product"
+    }
+  }
+}
+        ,
+        
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    }
+  } ,
+  
+  "/products/{productID}": {
+    "get": {
+      "x-swagger-router-controller": "Products",
+      "tags": ["Products"],
+      "operationId": "productsProductIDGet",
+      "parameters": [
+        
+        {
+  "name" : "productID",
+  "in" : "path",
+  "description" : "The id of the pet to retrieve",
+  "required" : true,
+  "type" : "integer"
+}
+        
+      ],
+      "responses": {
+        
+        "200": {
+  "description" : "Specified Warehouse Product if it Exists",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Product"
+    }
+  }
+}
+        ,
+        
+        "404": {
+  "description" : "Specified Warehouse product does not exist."
+}
+        ,
+        
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    }
+  } 
+  
+   
+  }, "definitions": {
+  "Product": {
+  "properties" : {
+    "product_id" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "Product UUID"
+    },
+    "description" : {
+      "type" : "string",
+      "description" : "Description of product."
+    },
+    "display_name" : {
+      "type" : "string",
+      "description" : "Display name of product."
+    },
+    "available" : {
+      "type" : "string",
+      "description" : "Number of available product."
+    }
+  }
+},"Order": {
+  "properties" : {
+    "accountid" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "ACME Warehouse Account ID"
+    },
+    "orderid" : {
+      "type" : "string",
+      "description" : "Order UUID"
+    },
+    "productid" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "Product ID"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "Amount of products ordered"
+    }
+  }
+},"OrderNumber": {
+  "properties" : {
+    "orderid" : {
+      "type" : "string",
+      "description" : "Order UUID"
+    }
+  }
+},"Error": {
+  "properties" : {
+    "code" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "message" : {
+      "type" : "string"
+    },
+    "fields" : {
+      "type" : "string"
+    }
+  }
+}
+  }
+}
