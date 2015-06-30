@@ -22,17 +22,18 @@ RUN apt-get install -y mongodb
 RUN apt-get install -y nodejs
 RUN apt-get install -y npm
 RUN apt-get install -y git
+RUN apt-get install -y nginx
 
 # Install NodeJS Needs
 RUN npm install mongodb
 RUN npm install connect
 RUN npm install swagger-tools
-RUN npm install pm2 -g
 
 # Clone the most recent ACMEWarehouse REST Demo
 RUN git clone https://github.com/themsquared/ACMEWarehouse-REST-Swagger.git acmewarehouse
 
-# Expose port 8080 for API
-EXPOSE 8080
+# Expose port 80 for nginx API proxy
+EXPOSE 80
 
-ENTRYPOINT memcached
+# Default command
+CMD ["nginx"]
