@@ -80,6 +80,16 @@
   "description" : "The id of the order to place",
   "required" : true,
   "type" : "string"
+},
+        
+        {
+  "in" : "body",
+  "name" : "order",
+  "description" : "JSON representation of an order.",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/Order"
+  }
 }
         
       ],
@@ -189,20 +199,16 @@
   }, "definitions": {
   "Product": {
   "properties" : {
-    "product_id" : {
+    "_id_" : {
       "type" : "integer",
       "format" : "int32",
       "description" : "Product UUID"
     },
-    "description" : {
-      "type" : "string",
-      "description" : "Description of product."
-    },
-    "display_name" : {
+    "name" : {
       "type" : "string",
       "description" : "Display name of product."
     },
-    "available" : {
+    "quantity" : {
       "type" : "string",
       "description" : "Number of available product."
     }
@@ -214,7 +220,7 @@
       "format" : "int32",
       "description" : "ACME Warehouse Account ID"
     },
-    "orderid" : {
+    "_id_" : {
       "type" : "string",
       "description" : "Order UUID"
     },
@@ -231,7 +237,7 @@
   }
 },"OrderNumber": {
   "properties" : {
-    "orderid" : {
+    "_id_" : {
       "type" : "string",
       "description" : "Order UUID"
     }

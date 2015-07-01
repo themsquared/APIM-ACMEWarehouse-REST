@@ -1,38 +1,21 @@
 'use strict';
 
-exports.orderGet = function() {
+var Order = require('../models/Order.js');
 
-  var examples = {};
-  
-  examples['application/json'] = [ {
-  "accountid" : 123,
-  "amount" : 123,
-  "productid" : 123,
-  "orderid" : "aeiou"
-} ];
-  
-
-  
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
-  
+exports.orderGet = function(callback) {
+	Order.getAll(function(err,orders){
+                callback(err,orders);
+        });  
 }
-exports.orderNewGet = function() {
 
-  var examples = {};
-  
-  examples['application/json'] = "{}";
-  
-
-  
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
-  
+exports.orderNewGet = function(callback) {
+	Order.getNew(function(err,newOrder){
+		callback(err,newOrder);
+	});
 }
-exports.orderOrderidPut = function(orderid) {
 
-  var examples = {};
-  
-
-  
+exports.orderOrderidPut = function(order, callback) {
+	Order.addOrder(order,function(err,newOrder) {
+		callback(err,newOrder);
+	});
 }

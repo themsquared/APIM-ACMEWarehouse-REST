@@ -26,11 +26,21 @@ RUN apt-get install -y nginx
 
 # Install NodeJS Needs
 RUN npm install mongodb
+RUN npm install mongoose
 RUN npm install connect
 RUN npm install swagger-tools
+RUN npm install shortid
 
-# Clone the most recent ACMEWarehouse REST Demo
-RUN git clone https://github.com/themsquared/ACMEWarehouse-REST-Swagger.git acmewarehouse
+# Create directory struct
+RUN mkdir /demo
+
+# Clone the most recent ACMEWarehouse REST Demo and CD into directory
+RUN git clone https://github.com/themsquared/ACMEWarehouse-REST-Swagger.git /demo/acmewarehouse
+RUN cd /demo/acmewarehouse
+RUN cp nginx-configuration/default /etc/nginx/
+
+# Define nginx mountable directories
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
 # Expose port 80 for nginx API proxy
 EXPOSE 80
