@@ -1,12 +1,13 @@
 #!/bin/bash
 
-NODEDIR=/demo/acmedemo/nodejs-server/
+NODEDIR=/demo/acmewarehouse/nodejs-server/
 
 exec service nginx restart
 exec service mongodb restart
 
 cd $NODEDIR
+echo $NODEDIR
 
-exec nodejs index.js &
+exec nodejs index.js
 
 

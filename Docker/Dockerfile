@@ -3,12 +3,12 @@
 # Based on Ubuntu Image
 ############################################################
 
+# Set the base image to use to Ubuntu
+FROM ubuntu
+
 LABEL version="1.0"
 LABEL stage="alpha"
 LABEL description="This image will contain an ACMEWarehosue REST Demo using Swagger"
-
-# Set the base image to use to Ubuntu
-FROM ubuntu
 
 # Set the file maintainer (your name - the file's author)
 MAINTAINER Mike Moore
@@ -36,7 +36,7 @@ RUN npm install shortid
 RUN mkdir /demo
 
 # Clone the most recent ACMEWarehouse REST Demo and CD into directory
-RUN git clone https://github.com/themsquared/ACMEWarehouse-REST-Swagger.git /demo/acmewarehouse
+RUN git clone https://github.com/themsquared/APIM-ACMEWarehouse-REST.git /demo/acmewarehouse
 RUN cp /demo/acmewarehouse/nginx-configuration/default /etc/nginx/sites-available/
 
 # Define nginx mountable directories
