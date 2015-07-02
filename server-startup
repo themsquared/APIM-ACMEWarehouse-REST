@@ -1,11 +1,16 @@
 #!/bin/bash
 
-NODEDIR="/demo/acmewarehouse/nodejs-server/"
+BASEDIR="/demo/acmewarehouse"
+NODEDIR="$BASEDIR/nodejs-server/"
 
-echo "$NODEDIR"
+# Clone the most recent ACMEWarehouse REST Demo and CD into directory
+git clone https://github.com/themsquared/APIM-ACMEWarehouse-REST.git "$BASEDIR"
+cp "$BASEDIR/nginx-configuration/default" /etc/nginx/sites-available/
+
 cd "$NODEDIR"
-exec service mongodb start
-exec service nginx start
+service mongodb start
+service nginx start
+
 exec nodejs index.js
 
 

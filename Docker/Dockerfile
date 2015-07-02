@@ -32,12 +32,8 @@ RUN npm install swagger-tools
 RUN npm install swagger
 RUN npm install shortid
 
-# Create directory struct
+# Create directory for the demo
 RUN mkdir /demo
-
-# Clone the most recent ACMEWarehouse REST Demo and CD into directory
-RUN git clone https://github.com/themsquared/APIM-ACMEWarehouse-REST.git /demo/acmewarehouse
-RUN cp /demo/acmewarehouse/nginx-configuration/default /etc/nginx/sites-available/
 
 # Define nginx mountable directories
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
