@@ -16,8 +16,7 @@ MAINTAINER Mike Moore
 # Update the default application repository sources list
 RUN apt-get update
 
-# Install Memcached, MondoDB, NodeJS, and npm.
-RUN apt-get install -y memcached
+# Install MondoDB, NodeJS, Git, and npm.
 RUN apt-get install -y mongodb
 RUN apt-get install -y nodejs
 RUN apt-get install -y npm
@@ -27,8 +26,10 @@ RUN apt-get install -y nginx
 # Install NodeJS Needs
 RUN npm install mongodb
 RUN npm install mongoose
+RUN npm install http
 RUN npm install connect
 RUN npm install swagger-tools
+RUN npm install swagger
 RUN npm install shortid
 
 # Create directory struct
@@ -36,8 +37,7 @@ RUN mkdir /demo
 
 # Clone the most recent ACMEWarehouse REST Demo and CD into directory
 RUN git clone https://github.com/themsquared/ACMEWarehouse-REST-Swagger.git /demo/acmewarehouse
-RUN cd /demo/acmewarehouse
-RUN cp nginx-configuration/default /etc/nginx/
+RUN cp /demo/acmewarehouse/nginx-configuration/default /etc/nginx/sites-available/
 
 # Define nginx mountable directories
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
@@ -46,4 +46,4 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 EXPOSE 80
 
 # Default command
-CMD ["nginx"]
+CMD ["bash","/demo/acmewarehouse/server-startup"]

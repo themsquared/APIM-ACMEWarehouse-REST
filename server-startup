@@ -1,0 +1,12 @@
+#!/bin/bash
+
+NODEDIR=/demo/acmedemo/nodejs-server/
+
+exec service nginx restart
+exec service mongodb restart
+
+cd $NODEDIR
+
+exec nodejs index.js &
+
+
