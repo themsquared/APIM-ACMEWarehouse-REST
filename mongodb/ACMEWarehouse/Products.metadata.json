@@ -1,1 +1,0 @@
-{ "options" : { "create" : "Products", "capped" : false }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "ACMEWarehouse.Products", "name" : "_id_" } ] }
