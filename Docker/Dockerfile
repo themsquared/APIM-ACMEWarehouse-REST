@@ -41,5 +41,7 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Expose port 80 for nginx API proxy
 EXPOSE 80
 
+ADD server-startup /demo/server-startup
+
 # Default command
-CMD ["bash","/demo/acmewarehouse/server-startup"]
+CMD ["bash","/demo/server-startup"]
