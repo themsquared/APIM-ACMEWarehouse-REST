@@ -4,9 +4,6 @@ NODEDIR="/demo/acmewarehouse/nodejs-server/"
 
 echo "$NODEDIR"
 
-exec service nginx restart
-exec service mongodb restart
-
 exec nodejs index.js
 
 
