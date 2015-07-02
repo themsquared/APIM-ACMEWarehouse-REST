@@ -3,7 +3,7 @@
 NODEDIR="/demo/acmewarehouse/nodejs-server/"
 
 echo "$NODEDIR"
-
+cd "$NODEDIR"
 exec nodejs index.js
 
 
